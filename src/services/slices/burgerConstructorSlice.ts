@@ -60,6 +60,13 @@ const constructorSlice = createSlice({
 });
 
 export const {
+  addIngredient,
+  clearCounstructor,
+  moveIngredient,
+  removeIngredient
+} = constructorSlice.actions;
+
+export const {
   selectConstructorBun,
   selectConstructorIngredients,
   selectConstructorItems
