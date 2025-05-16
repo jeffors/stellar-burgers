@@ -39,27 +39,10 @@ const ingredientsSlice = createSlice({
   },
   selectors: {
     selectIngredients: (state: IngredientsState) => state.ingredients,
-    selectIngredientsLoading: (state: IngredientsState) => state.isLoading,
-    selectBuns: (state: IngredientsState) =>
-      state.ingredients.filter(
-        (ingredient: TIngredient) => ingredient.type === 'bun'
-      ),
-    selectMains: (state: IngredientsState) =>
-      state.ingredients.filter(
-        (ingredient: TIngredient) => ingredient.type === 'main'
-      ),
-    selectSauces: (state: IngredientsState) =>
-      state.ingredients.filter(
-        (ingredient: TIngredient) => ingredient.type === 'sauce'
-      )
+    selectIngredientsLoading: (state: IngredientsState) => state.isLoading
   }
 });
 
 export default ingredientsSlice.reducer;
-export const {
-  selectIngredients,
-  selectIngredientsLoading,
-  selectBuns,
-  selectMains,
-  selectSauces
-} = ingredientsSlice.selectors;
+export const { selectIngredients, selectIngredientsLoading } =
+  ingredientsSlice.selectors;
