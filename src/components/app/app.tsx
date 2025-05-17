@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { fetchIngredients } from '../../services/slices/ingredientsSlice';
 import { useDispatch } from '../../services/store';
 import { fetchFeed } from '../../services/slices/feedSlice';
+import { fetchUser } from '../../services/slices/userSlice';
 
 const App = () => {
   const location = useLocation();
@@ -28,6 +29,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchIngredients());
     dispatch(fetchFeed());
+    dispatch(fetchUser());
   }, []);
 
   const onClose = () => {

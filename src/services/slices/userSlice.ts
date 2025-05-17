@@ -1,4 +1,5 @@
 import {
+  getUserApi,
   loginUserApi,
   logoutApi,
   registerUserApi,
@@ -17,6 +18,11 @@ export const initialState: UserState = {
   user: null,
   isAuthChecked: false
 };
+
+export const fetchUser = createAsyncThunk('/user/fetchUser', async () => {
+  const response = await getUserApi();
+  return response;
+});
 
 export const loginUser = createAsyncThunk(
   'user/loginUser',
@@ -59,6 +65,13 @@ export const userSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
+      })
+      .addCase(fetchUser.rejected, (state) => {
+        state.isAuthChecked = true;
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.isAuthChecked = true;
       });
   }
 });
