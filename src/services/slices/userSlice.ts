@@ -53,6 +53,10 @@ export const userSlice = createSlice({
         state.user = action.payload.user;
         state.isAuthChecked = true;
       })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.isAuthChecked = true;
+      })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
       });
