@@ -18,6 +18,7 @@ import { ProtectedRoute } from '../protected-route';
 import { useEffect } from 'react';
 import { fetchIngredients } from '../../services/slices/ingredientsSlice';
 import { useDispatch } from '../../services/store';
+import { fetchFeed } from '../../services/slices/feedSlice';
 
 const App = () => {
   const location = useLocation();
@@ -26,6 +27,7 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchIngredients());
+    dispatch(fetchFeed());
   }, []);
 
   const onClose = () => {
