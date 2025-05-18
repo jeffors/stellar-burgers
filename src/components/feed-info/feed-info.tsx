@@ -4,9 +4,9 @@ import { TOrder } from '@utils-types';
 import { FeedInfoUI } from '../ui/feed-info';
 import { useSelector } from '../../services/store';
 import {
-  selectOrders,
-  selectTotal,
-  selectTotalToday
+  selectFeedOrders,
+  selectFeedTotal,
+  selectFeedTotalToday
 } from '../../services/slices/feedSlice';
 
 const getOrders = (orders: TOrder[], status: string): number[] =>
@@ -17,10 +17,10 @@ const getOrders = (orders: TOrder[], status: string): number[] =>
 
 export const FeedInfo: FC = () => {
   /** TODO: взять переменные из стора */
-  const orders: TOrder[] = useSelector(selectOrders);
+  const orders: TOrder[] = useSelector(selectFeedOrders);
   const feed = {
-    total: useSelector(selectTotal),
-    totalToday: useSelector(selectTotalToday)
+    total: useSelector(selectFeedTotal),
+    totalToday: useSelector(selectFeedTotalToday)
   };
 
   const readyOrders = getOrders(orders, 'done');

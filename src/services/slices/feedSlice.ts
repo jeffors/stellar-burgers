@@ -24,9 +24,9 @@ const feedSlice = createSlice({
   initialState,
   reducers: {},
   selectors: {
-    selectOrders: (state) => state.orders,
-    selectTotal: (state) => state.total,
-    selectTotalToday: (state) => state.totalToday
+    selectFeedOrders: (state) => state.orders,
+    selectFeedTotal: (state) => state.total,
+    selectFeedTotalToday: (state) => state.totalToday
   },
   extraReducers: (builder) => {
     builder.addCase(fetchFeed.fulfilled, (state, action) => {
@@ -37,6 +37,6 @@ const feedSlice = createSlice({
   }
 });
 
-export const { selectOrders, selectTotal, selectTotalToday } =
+export const { selectFeedOrders, selectFeedTotal, selectFeedTotalToday } =
   feedSlice.selectors;
 export default feedSlice.reducer;
