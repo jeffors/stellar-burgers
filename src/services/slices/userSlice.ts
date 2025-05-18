@@ -4,7 +4,8 @@ import {
   logoutApi,
   registerUserApi,
   TLoginData,
-  TRegisterData
+  TRegisterData,
+  updateUserApi
 } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
@@ -52,6 +53,14 @@ export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
   return response;
 });
 
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (form: Partial<TRegisterData>) => {
+    const response = await updateUserApi(form);
+    return response;
+  }
+);
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -79,6 +88,9 @@ export const userSlice = createSlice({
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isAuthChecked = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
       });
   }
 });
