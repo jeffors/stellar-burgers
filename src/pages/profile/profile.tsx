@@ -1,11 +1,13 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { useSelector } from '../../services/store';
+import { selectUser } from '../../services/slices/userSlice';
 
 export const Profile: FC = () => {
-  /** TODO: взять переменную из стора */
+  // Возникает ошибка Maximum update depth exceeded
   const user = {
-    name: '',
-    email: ''
+    name: useSelector(selectUser)?.name || '',
+    email: useSelector(selectUser)?.email || ''
   };
 
   const [formValue, setFormValue] = useState({
