@@ -14,11 +14,13 @@ import { deleteCookie, setCookie } from '../../utils/cookie';
 type UserState = {
   user: TUser | null;
   isAuthChecked: boolean;
+  updateUserError: string | undefined;
 };
 
 export const initialState: UserState = {
   user: null,
-  isAuthChecked: false
+  isAuthChecked: false,
+  updateUserError: undefined
 };
 
 export const fetchUser = createAsyncThunk('/user/fetchUser', async () => {
@@ -67,7 +69,8 @@ export const userSlice = createSlice({
   reducers: {},
   selectors: {
     selectUser: (state) => state.user,
-    selectIsAuthChecked: (state) => state.isAuthChecked
+    selectIsAuthChecked: (state) => state.isAuthChecked,
+    selectUserUpdateError: (state) => state.updateUserError
   },
   extraReducers: (builder) => {
     builder
@@ -91,9 +94,14 @@ export const userSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
+        state.updateUserError = undefined;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.updateUserError = action.error.message;
       });
   }
 });
 
-export const { selectUser, selectIsAuthChecked } = userSlice.selectors;
+export const { selectUser, selectIsAuthChecked, selectUserUpdateError } =
+  userSlice.selectors;
 export default userSlice.reducer;
