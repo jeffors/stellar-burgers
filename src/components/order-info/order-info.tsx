@@ -13,16 +13,6 @@ import {
 export const OrderInfo: FC = () => {
   const { number } = useParams();
   const dispatch = useDispatch();
-  /** TODO: взять переменные orderData и ingredients из стора */
-  // const orderData = {
-  //   createdAt: '',
-  //   ingredients: [],
-  //   _id: '',
-  //   status: '',
-  //   name: '',
-  //   updatedAt: 'string',
-  //   number: 0
-  // };
   const orderData = useSelector(selectOrder);
 
   useEffect(() => {

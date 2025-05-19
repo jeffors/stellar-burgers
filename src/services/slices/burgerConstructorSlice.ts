@@ -41,7 +41,6 @@ const constructorSlice = createSlice({
     ) => {
       const { indexFrom, indexTo } = action.payload;
       const ingredients = state.ingredients;
-      // нашёл прикольное решение на GeeksForGeeks, хотя в целом можно юзануть два splice()
       [ingredients[indexFrom], ingredients[indexTo]] = [
         ingredients[indexTo],
         ingredients[indexFrom]
