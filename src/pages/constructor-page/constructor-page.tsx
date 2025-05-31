@@ -20,8 +20,6 @@ export const ConstructorPage: FC = () => {
         <main className={styles.containerMain}>
           <h1
             className={`${styles.title} text text_type_main-large mt-10 mb-5 pl-5`}
-            // для теста, потом убрать
-            data-cy='constructor-header'
           >
             Соберите бургер
           </h1>
