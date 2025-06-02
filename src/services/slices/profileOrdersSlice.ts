@@ -6,7 +6,7 @@ type ProfileState = {
   orders: TOrder[];
 };
 
-const initialState: ProfileState = {
+export const initialState: ProfileState = {
   orders: []
 };
 
