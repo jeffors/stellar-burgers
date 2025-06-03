@@ -18,6 +18,13 @@ describe('Тестирование Stellar Burgers', () => {
     });
   });
 
+  afterEach(() => {
+    cy.clearCookie('accessToken');
+    cy.window().then((window) => {
+      window.localStorage.removeItem('refreshToken');
+    });
+  });
+
   it('Добавление ингридентов', () => {
     cy.contains('Краторная булка N-200i').parent().find('button').click();
     cy.get('[data-cy="burger-top"]').should(
