@@ -45,7 +45,7 @@ describe('Тестирование слайса с ингридиентами', 
     expect(state.isLoading).toBe(false);
     expect(state.ingredients).toEqual(ingredients);
   });
-  it('Экшен ошибки запроса', () => {
+  it('Экшен ошибки запроса (rejected)', () => {
     const state = reducer(initialState, {
       type: fetchIngredients.rejected.type
     });
