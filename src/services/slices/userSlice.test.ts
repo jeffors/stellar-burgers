@@ -13,7 +13,7 @@ const userResponse = {
 };
 
 describe('Тестирование входа пользователя', () => {
-  it('Экшен успешного выполнения (fulfiled)', () => {
+  it('Экшен успешного выполнения (fulfilled)', () => {
     const state = reducer(initialState, {
       type: loginUser.fulfilled.type,
       payload: userResponse
@@ -23,7 +23,7 @@ describe('Тестирование входа пользователя', () => {
   });
 });
 describe('Тестирование регистрации пользователя', () => {
-  it('Экшен успешного выполнения (fulfiled)', () => {
+  it('Экшен успешного выполнения (fulfilled)', () => {
     const state = reducer(initialState, {
       type: registerUser.fulfilled.type,
       payload: userResponse
@@ -33,7 +33,7 @@ describe('Тестирование регистрации пользовател
   });
 });
 describe('Тестирование логаута пользователя', () => {
-  it('Экшен успешного выполнения (fulfiled)', () => {
+  it('Экшен успешного выполнения (fulfilled)', () => {
     const state = reducer(initialState, {
       type: logoutUser.fulfilled.type,
       payload: userResponse
@@ -42,7 +42,7 @@ describe('Тестирование логаута пользователя', () 
   });
 });
 describe('Тестирование фетча пользователя', () => {
-  it('Экшен успешного выполнения (fulfiled)', () => {
+  it('Экшен успешного выполнения (fulfilled)', () => {
     const state = reducer(initialState, {
       type: fetchUser.fulfilled.type,
       payload: userResponse
@@ -58,9 +58,12 @@ describe('Тестирование фетча пользователя', () => {
   });
 });
 describe('Тестирование обновления пользователя', () => {
-  const updatedUser = { ...userResponse, user: { ...userResponse.user, name: 'updatedTest' } };
+  const updatedUser = {
+    ...userResponse,
+    user: { ...userResponse.user, name: 'updatedTest' }
+  };
 
-  it('Экшен успешного выполнения (fulfiled)', () => {
+  it('Экшен успешного выполнения (fulfilled)', () => {
     const previousState = {
       user: userResponse.user,
       isAuthChecked: true,
@@ -68,17 +71,17 @@ describe('Тестирование обновления пользователя
     };
     const state = reducer(previousState, {
       type: updateUser.fulfilled.type,
-      payload: userResponse
+      payload: updatedUser
     });
-    expect(state.user).toEqual(userResponse.user);
+    expect(state.user).toEqual(updatedUser.user);
     expect(state.updateUserError).toBeUndefined();
     expect(state.isAuthChecked).toBe(true);
   });
   it('Экшен ошибки запроса (rejected)', () => {
     const previousState = {
+      ...initialState,
       user: userResponse.user,
-      isAuthChecked: true,
-      updateUserError: 'Тестовая ошибка'
+      isAuthChecked: true
     };
     const errorMessage = 'Ошибка обновления пользователя';
     const state = reducer(previousState, {
