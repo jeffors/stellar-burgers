@@ -7,7 +7,7 @@ import reducer, {
   updateUser
 } from './userSlice';
 
-const user = {
+const userResponse = {
   success: true,
   user: { email: 'test@test.ru', name: 'test' }
 };
@@ -16,9 +16,9 @@ describe('Тестирование входа пользователя', () => {
   it('Экшен успешного выполнения (fulfiled)', () => {
     const state = reducer(initialState, {
       type: loginUser.fulfilled.type,
-      payload: user
+      payload: userResponse
     });
-    expect(state.user).toEqual(user.user);
+    expect(state.user).toEqual(userResponse.user);
     expect(state.isAuthChecked).toBe(true);
   });
 });
@@ -26,9 +26,9 @@ describe('Тестирование регистрации пользовател
   it('Экшен успешного выполнения (fulfiled)', () => {
     const state = reducer(initialState, {
       type: registerUser.fulfilled.type,
-      payload: user
+      payload: userResponse
     });
-    expect(state.user).toEqual(user.user);
+    expect(state.user).toEqual(userResponse.user);
     expect(state.isAuthChecked).toBe(true);
   });
 });
@@ -36,7 +36,7 @@ describe('Тестирование логаута пользователя', () 
   it('Экшен успешного выполнения (fulfiled)', () => {
     const state = reducer(initialState, {
       type: logoutUser.fulfilled.type,
-      payload: user
+      payload: userResponse
     });
     expect(state.user).toBeNull;
   });
@@ -45,9 +45,9 @@ describe('Тестирование фетча пользователя', () => {
   it('Экшен успешного выполнения (fulfiled)', () => {
     const state = reducer(initialState, {
       type: fetchUser.fulfilled.type,
-      payload: user
+      payload: userResponse
     });
-    expect(state.user).toEqual(user.user);
+    expect(state.user).toEqual(userResponse.user);
     expect(state.isAuthChecked).toBe(true);
   });
   it('Экшен ошибки запроса (rejected)', () => {
@@ -58,20 +58,35 @@ describe('Тестирование фетча пользователя', () => {
   });
 });
 describe('Тестирование обновления пользователя', () => {
+  const updatedUser = { ...userResponse, user: { ...userResponse.user, name: 'updatedTest' } };
+
   it('Экшен успешного выполнения (fulfiled)', () => {
-    const state = reducer(initialState, {
+    const previousState = {
+      user: userResponse.user,
+      isAuthChecked: true,
+      updateUserError: 'Тестовая ошибка'
+    };
+    const state = reducer(previousState, {
       type: updateUser.fulfilled.type,
-      payload: user
+      payload: userResponse
     });
-    expect(state.user).toEqual(user.user);
+    expect(state.user).toEqual(userResponse.user);
     expect(state.updateUserError).toBeUndefined();
+    expect(state.isAuthChecked).toBe(true);
   });
   it('Экшен ошибки запроса (rejected)', () => {
-    const errorMessage = 'Ошибка обновления пользователя'
-    const state = reducer(initialState, {
+    const previousState = {
+      user: userResponse.user,
+      isAuthChecked: true,
+      updateUserError: 'Тестовая ошибка'
+    };
+    const errorMessage = 'Ошибка обновления пользователя';
+    const state = reducer(previousState, {
       type: updateUser.rejected.type,
       error: { message: errorMessage }
     });
+    expect(state.user).toEqual(userResponse.user);
+    expect(state.isAuthChecked).toBe(true);
     expect(state.updateUserError).toBe(errorMessage);
   });
 });
