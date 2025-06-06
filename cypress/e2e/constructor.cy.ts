@@ -9,7 +9,7 @@ describe('Тестирование Stellar Burgers', () => {
     cy.intercept('POST', 'api/orders', { fixture: 'orders.json' }).as(
       'postOrder'
     );
-    cy.visit('http://localhost:4000/');
+    cy.visit('/');
     cy.wait(['@getIngredients', '@getUser']);
 
     cy.setCookie('accessToken', 'Bearer fake.cypress.test');
@@ -19,10 +19,8 @@ describe('Тестирование Stellar Burgers', () => {
   });
 
   afterEach(() => {
-    cy.clearCookie('accessToken');
-    cy.window().then((window) => {
-      window.localStorage.removeItem('refreshToken');
-    });
+    cy.clearCookies();
+    cy.clearLocalStorage();
   });
 
   describe('Тестирование конструктора', () => {
