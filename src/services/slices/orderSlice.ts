@@ -8,7 +8,7 @@ type OrderState = {
   createdOrderLoading: boolean;
 };
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   order: null,
   createdOrder: null,
   createdOrderLoading: false
